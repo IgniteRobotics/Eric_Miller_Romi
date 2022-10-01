@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.RomiDrivetrain;
+import frc.robot.commands.ArcadeDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -17,14 +18,18 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final RomiDrivetrain m_romiDrivetrain = new RomiDrivetrain();
+  private final RomiDrivetrain m_RomiDrivetrain = new RomiDrivetrain();
+  private final XboxController m_controller = new XboxController(0);
+  private final ArcadeDrive arcadeDriveCommand = new ArcadeDrive(m_RomiDrivetrain, () -> m_controller.getLeftX(),() -> m_controller.getRightY());
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_romiDrivetrain);
+  private final ExampleCommand m_autoCommand = new ExampleCommand(m_RomiDrivetrain);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    setDefaultCommands();
+  
   }
 
   /**
@@ -34,6 +39,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {}
+
+  private void setDefaultCommands(){
+    m_RomiDrivetrain.setDefaultCommand(arcadeDriveCommand);
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

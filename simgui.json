@@ -6,5 +6,16 @@
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
     }
+  },
+  "NetworkTables": {
+    "LiveWindow": {
+      "Ungrouped": {
+        "DifferentialDrive[1]": {
+          "open": true
+        },
+        "open": true
+      },
+      "open": true
+    }
   }
 }
