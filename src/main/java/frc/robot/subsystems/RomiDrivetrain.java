@@ -8,10 +8,12 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class RomiDrivetrain extends SubsystemBase {
   private static final double kCountsPerRevolution = 1440.0;
   private static final double kWheelDiameterInch = 2.75591; // 70 mm
+
 
   // The Romi has the left and right motors set to
   // PWM channels 0 and 1 respectively
@@ -38,8 +40,8 @@ public class RomiDrivetrain extends SubsystemBase {
   }
 
   public void arcadeDrive(double xaxisSpeed, double zaxisRotate) {
-    Math.pow(xaxisSpeed, 2);
-    Math.pow(zaxisRotate, 2);
+    Math.pow(xaxisSpeed, Constants.k_XAxisExponent);
+    Math.pow(zaxisRotate, Constants.k_YAxisExponent);
     m_diffDrive.arcadeDrive(xaxisSpeed, zaxisRotate);
   }
 
