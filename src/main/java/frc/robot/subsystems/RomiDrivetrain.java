@@ -38,6 +38,8 @@ public class RomiDrivetrain extends SubsystemBase {
   }
 
   public void arcadeDrive(double xaxisSpeed, double zaxisRotate) {
+    Math.pow(xaxisSpeed, 2);
+    Math.pow(zaxisRotate, 2);
     m_diffDrive.arcadeDrive(xaxisSpeed, zaxisRotate);
   }
 
