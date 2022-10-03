@@ -7,12 +7,14 @@ package frc.robot.commands;
 import java.util.function.Supplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.RomiDrivetrain;
+import frc.robot.Constants;
 
 public class ArcadeDrive extends CommandBase {
 
   RomiDrivetrain m_drivetrain;
   Supplier<Double> m_XAxisSpeedSupplier;
   Supplier<Double> m_YAxisSpeedSupplier;
+  Supplier<Double> m_SpeedMultiplier;
 
   /** Creates a new ArcadeDrive. */
   public ArcadeDrive(RomiDrivetrain drivetrain, Supplier<Double> LeftXAxis, Supplier<Double> RightYAxis) {
@@ -33,7 +35,11 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrain.arcadeDrive(m_XAxisSpeedSupplier.get(), m_YAxisSpeedSupplier.get());
+    double XAxisSpeed = m_XAxisSpeedSupplier.get();
+    double YAxisSpeed = m_YAxisSpeedSupplier.get();
+    double XFinalSpeed = 0.7 * Math.pow(XAxisSpeed, Constants.k_XAxisExponent);
+    double YFinalSpeed = 0.7 * Math.pow(YAxisSpeed, Constants.k_YAxisExponent);
+    m_drivetrain.arcadeDrive(XFinalSpeed, YFinalSpeed);
   }
 
   // Called once the command ends or is interrupted.

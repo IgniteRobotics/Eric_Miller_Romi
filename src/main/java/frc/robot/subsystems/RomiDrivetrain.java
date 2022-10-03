@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+
 
 public class RomiDrivetrain extends SubsystemBase {
   private static final double kCountsPerRevolution = 1440.0;
@@ -40,9 +40,8 @@ public class RomiDrivetrain extends SubsystemBase {
   }
 
   public void arcadeDrive(double xaxisSpeed, double zaxisRotate) {
-    Math.pow(xaxisSpeed, Constants.k_XAxisExponent);
-    Math.pow(zaxisRotate, Constants.k_YAxisExponent);
-    m_diffDrive.arcadeDrive(xaxisSpeed, zaxisRotate);
+
+    m_diffDrive.arcadeDrive(xaxisSpeed, zaxisRotate, false);
   }
 
   public void resetEncoders() {
