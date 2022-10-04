@@ -13,6 +13,6 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static double k_XAxisExponent = 2;
-    public static double k_YAxisExponent = 2;
+    public static double k_XAxisExponent = Math.E;  
+    public static double k_YAxisExponent = Math.E;
 }

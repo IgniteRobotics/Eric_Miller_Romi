@@ -14,10 +14,10 @@ public class ArcadeDrive extends CommandBase {
   RomiDrivetrain m_drivetrain;
   Supplier<Double> m_XAxisSpeedSupplier;
   Supplier<Double> m_YAxisSpeedSupplier;
-  Supplier<Double> m_SpeedMultiplier;
+  Supplier<Boolean> m_SpeedMultiplier;
 
   /** Creates a new ArcadeDrive. */
-  public ArcadeDrive(RomiDrivetrain drivetrain, Supplier<Double> LeftXAxis, Supplier<Double> RightYAxis) {
+  public ArcadeDrive(RomiDrivetrain drivetrain, Supplier<Double> LeftXAxis, Supplier<Double> RightYAxis, Supplier<Boolean> m_SpeedMultiplier) {
     m_drivetrain = drivetrain;
     m_XAxisSpeedSupplier = LeftXAxis;
     m_YAxisSpeedSupplier = RightYAxis;
@@ -35,11 +35,17 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double XAxisSpeed = m_XAxisSpeedSupplier.get();
-    double YAxisSpeed = m_YAxisSpeedSupplier.get();
-    double XFinalSpeed = 0.7 * Math.pow(XAxisSpeed, Constants.k_XAxisExponent);
-    double YFinalSpeed = 0.7 * Math.pow(YAxisSpeed, Constants.k_YAxisExponent);
-    m_drivetrain.arcadeDrive(XFinalSpeed, YFinalSpeed);
+    double XAxisInput = m_XAxisSpeedSupplier.get();
+    double YAxisInput = m_YAxisSpeedSupplier.get();
+    double XAxisSpeed = Math.signum(XAxisInput) * Math.pow(Math.abs(XAxisInput), Constants.k_XAxisExponent);
+    double YAxisSpeed = Math.signum(YAxisInput) * Math.pow(Math.abs(YAxisInput), Constants.k_YAxisExponent);
+    //boolean blah = m_SpeedMultiplier.get();
+    /*if (blah == true){
+      XAxisSpeed = XAxisSpeed * 0.7;
+      YAxisSpeed = YAxisSpeed * 0.7;
+    }*/
+    
+    m_drivetrain.arcadeDrive(XAxisSpeed, YAxisSpeed);
   }
 
   // Called once the command ends or is interrupted.
