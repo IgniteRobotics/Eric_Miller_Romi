@@ -14,14 +14,14 @@ public class ArcadeDrive extends CommandBase {
   RomiDrivetrain m_drivetrain;
   Supplier<Double> m_XAxisSpeedSupplier;
   Supplier<Double> m_YAxisSpeedSupplier;
-  Supplier<Boolean> m_SpeedMultiplier;
+  Supplier<Double> m_SpeedMultiplierInput;
 
   /** Creates a new ArcadeDrive. */
-  public ArcadeDrive(RomiDrivetrain drivetrain, Supplier<Double> LeftXAxis, Supplier<Double> RightYAxis, Supplier<Boolean> SpeedMultiplier) {
+  public ArcadeDrive(RomiDrivetrain drivetrain, Supplier<Double> LeftXAxis, Supplier<Double> RightYAxis, Supplier<Double> SpeedMultiplier) {
     m_drivetrain = drivetrain;
     m_XAxisSpeedSupplier = LeftXAxis;
     m_YAxisSpeedSupplier = RightYAxis;
-    m_SpeedMultiplier = SpeedMultiplier;
+    m_SpeedMultiplierInput = SpeedMultiplier;
     addRequirements(drivetrain);
 
     // Use addRequirements() here to declare subsystem dependencies.
@@ -40,11 +40,12 @@ public class ArcadeDrive extends CommandBase {
     double YAxisInput = m_YAxisSpeedSupplier.get();
     double XAxisSpeed = Math.signum(XAxisInput) * Math.pow(Math.abs(XAxisInput), Constants.k_XAxisExponent);
     double YAxisSpeed = Math.signum(YAxisInput) * Math.pow(Math.abs(YAxisInput), Constants.k_YAxisExponent);
-    boolean blah = m_SpeedMultiplier.get();
-    if (blah == true){
-      XAxisSpeed = XAxisSpeed * 0.7;
-      YAxisSpeed = YAxisSpeed * 0.7;
-    }
+    double blah = m_SpeedMultiplierInput.get();
+    double m_SpeedMultiplier = 1/(2 + blah);
+
+    XAxisSpeed = -XAxisSpeed * m_SpeedMultiplier;
+    YAxisSpeed = -YAxisSpeed * m_SpeedMultiplier;
+    
     
     m_drivetrain.arcadeDrive(XAxisSpeed, YAxisSpeed);
   }
