@@ -48,7 +48,7 @@ public class RomiDrivetrain extends SubsystemBase {
   }
 
   public void Motors(double LeftMotor, Double RightMotor){
-    m_diffDrive.tankDrive(LeftMotor, LeftMotor);
+    m_diffDrive.tankDrive(LeftMotor, RightMotor);
   }
 
   public void stop(){

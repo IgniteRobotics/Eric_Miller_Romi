@@ -13,13 +13,12 @@ public class DriveDistance extends CommandBase {
   RomiDrivetrain drivetrain;
   double Distance;
   double SpeedReducer;
-  double k_power = 3;
   double leftDiff;
   double rightDiff;
   /** Creates a new DriveDistance. */
   public DriveDistance(RomiDrivetrain InputedDrivetrain, double InputedDistance, double InputedSpeedReducer) {
     drivetrain = InputedDrivetrain;
-    Distance = InputedDistance;
+    Distance = InputedDistance + Math.signum(InputedDistance);
     SpeedReducer = InputedSpeedReducer;
     addRequirements(drivetrain);
   }
@@ -28,6 +27,7 @@ public class DriveDistance extends CommandBase {
   @Override
   public void initialize() {
     drivetrain.stop();
+    drivetrain.resetEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -35,8 +35,8 @@ public class DriveDistance extends CommandBase {
   public void execute() {
   leftDiff = Distance - drivetrain.getLeftDistanceInch();
   rightDiff = Distance - drivetrain.getRightDistanceInch();
-  double leftSpeed = Math.signum(leftDiff) * SpeedReducer *  k_power * Math.log(Math.abs(leftDiff))/Math.log(Math.pow(Distance, k_power));
-  double rightSpeed = Math.signum(rightDiff) * SpeedReducer * k_power * Math.log(Math.abs(rightDiff))/Math.log(Math.pow(Distance, k_power));
+  double leftSpeed = Math.signum(leftDiff) * SpeedReducer * Math.cbrt(Math.log(Math.abs(leftDiff))/Math.log(Math.abs(Distance)));
+  double rightSpeed = Math.signum(rightDiff) * SpeedReducer * Math.cbrt(Math.log(Math.abs(rightDiff))/Math.log(Math.abs(Distance)));
 
   drivetrain.Motors(leftSpeed, rightSpeed);
   }
@@ -50,9 +50,9 @@ public class DriveDistance extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    leftDiff = Distance - drivetrain.getLeftDistanceInch();
-    rightDiff = Distance - drivetrain.getRightDistanceInch();
-    if(leftDiff < 0.1 && leftDiff > -0.1 && rightDiff < 0.1 && rightDiff > -0.1){
+    double AbsLeftDiff = Math.abs(Distance - drivetrain.getLeftDistanceInch());
+    double AbsRightDiff = Math.abs(Distance - drivetrain.getRightDistanceInch());
+    if(AbsLeftDiff < 1.1 && AbsLeftDiff > 0.9 && AbsRightDiff < 1.1 && AbsRightDiff > 0.9){
       return true;
     }
     return false;
