@@ -27,7 +27,6 @@ public class ArcadeDrive extends CommandBase {
     addRequirements(drivetrain);
 
     // Use addRequirements() here to declare subsystem dependencies.
-  
 
   }
 

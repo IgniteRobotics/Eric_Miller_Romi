@@ -47,6 +47,14 @@ public class RomiDrivetrain extends SubsystemBase {
     SmartDashboard.putData("RightMotor", m_rightMotor);
   }
 
+  public void Motors(double LeftMotor, Double RightMotor){
+    m_diffDrive.tankDrive(LeftMotor, LeftMotor);
+  }
+
+  public void stop(){
+    m_diffDrive.arcadeDrive(0, 0);
+  }
+
   public void resetEncoders() {
     m_leftEncoder.reset();
     m_rightEncoder.reset();
