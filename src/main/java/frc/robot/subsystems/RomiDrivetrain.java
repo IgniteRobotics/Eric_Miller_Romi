@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
@@ -42,6 +43,8 @@ public class RomiDrivetrain extends SubsystemBase {
   public void arcadeDrive(double xaxisSpeed, double zaxisRotate) {
 
     m_diffDrive.arcadeDrive(xaxisSpeed, zaxisRotate, false);
+    SmartDashboard.putData("LeftMotor", m_leftMotor);
+    SmartDashboard.putData("RightMotor", m_rightMotor);
   }
 
   public void resetEncoders() {

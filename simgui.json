@@ -4,7 +4,9 @@
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/RomiDrivetrain": "Subsystem",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
-      "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/SmartDashboard/LeftMotor": "Motor Controller",
+      "/SmartDashboard/RightMotor": "Motor Controller"
     }
   },
   "NetworkTables": {
@@ -13,6 +15,12 @@
         "DifferentialDrive[1]": {
           "open": true
         },
+        "open": true
+      },
+      "open": true
+    },
+    "SmartDashboard": {
+      "LeftMotor": {
         "open": true
       },
       "open": true

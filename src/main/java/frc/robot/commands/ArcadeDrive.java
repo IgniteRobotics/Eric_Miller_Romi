@@ -5,6 +5,8 @@
 package frc.robot.commands;
 
 import java.util.function.Supplier;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.RomiDrivetrain;
 import frc.robot.Constants;
@@ -38,6 +40,8 @@ public class ArcadeDrive extends CommandBase {
   public void execute() {
     double XAxisInput = m_XAxisSpeedSupplier.get();
     double YAxisInput = m_YAxisSpeedSupplier.get();
+    SmartDashboard.putNumber("LeftStick", XAxisInput);
+    SmartDashboard.putNumber("RightStick", YAxisInput);
     double XAxisSpeed = Math.signum(XAxisInput) * Math.pow(Math.abs(XAxisInput), Constants.k_XAxisExponent);
     double YAxisSpeed = Math.signum(YAxisInput) * Math.pow(Math.abs(YAxisInput), Constants.k_YAxisExponent);
     double blah = m_SpeedMultiplierInput.get();
