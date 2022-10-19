@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.TurnDegrees;
 import frc.robot.subsystems.RomiDrivetrain;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.DriveDistance;
@@ -25,10 +26,12 @@ public class RobotContainer {
   private final XboxController m_controller = new XboxController(0);
   private final ArcadeDrive arcadeDriveCommand = new ArcadeDrive(m_RomiDrivetrain, () -> m_controller.getLeftY(),() -> m_controller.getRightX(), () -> m_controller.getRawAxis(5));
   private final DriveDistance driveDistanceCommand = new DriveDistance(m_RomiDrivetrain, 5, 1);
+  private final TurnDegrees TurnCommand = new TurnDegrees(m_RomiDrivetrain, 100, 1);
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_RomiDrivetrain);
 
   private JoystickButton buttonA = new JoystickButton(m_controller, XboxController.Button.kA.value);
+  private JoystickButton buttonB = new JoystickButton(m_controller, XboxController.Button.kB.value);
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -47,6 +50,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     buttonA.whenHeld(driveDistanceCommand);
+    buttonB.whenHeld(TurnCommand);
   }
 
   private void setDefaultCommands(){
