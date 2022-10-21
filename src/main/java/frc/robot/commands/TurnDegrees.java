@@ -17,10 +17,11 @@ public class TurnDegrees extends CommandBase {
 
   public TurnDegrees(RomiDrivetrain drivetrain,double degrees, double speedLimiter) {
     double inchPerDegree = Math.PI * 5.551 / 360;
-    arcLength = inchPerDegree * degrees;
+    arcLength = inchPerDegree * degrees + Math.signum(inchPerDegree * degrees);
     Limit = speedLimiter;
     m_drivetrain = drivetrain;
     
+    addRequirements(m_drivetrain);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
