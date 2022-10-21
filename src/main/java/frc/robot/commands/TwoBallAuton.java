@@ -5,28 +5,25 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+
 import frc.robot.subsystems.RomiDrivetrain;
 import frc.robot.Parameters.AutonPreferences;
-
-
 
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class OneBallAuton extends SequentialCommandGroup {
-  /** Creates a new OneBallAuton. */
-  public OneBallAuton(RomiDrivetrain drivetrain) {
+public class TwoBallAuton extends SequentialCommandGroup {
+  /** Creates a new TwoBallAuton. */
+  public TwoBallAuton(RomiDrivetrain drivetrain) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-    new TurnDegrees(drivetrain, AutonPreferences.autonFirstAngle, 1),
-    new DriveDistance(drivetrain, AutonPreferences.autonFirstDistance, 1),
-    new TurnDegrees(drivetrain, AutonPreferences.autonSecondAngle, 1),
-    new DriveDistance(drivetrain, AutonPreferences.autonSecondDistance, 1)
+      new OneBallAuton(drivetrain),
+      new TurnDegrees(drivetrain, AutonPreferences.autonThirdAngle, 1),
+      new DriveDistance(drivetrain, AutonPreferences.autonThirdDistance, 1),
+      new TurnDegrees(drivetrain, AutonPreferences.autonFourthAngle, 1),
+      new DriveDistance(drivetrain, AutonPreferences.autonFourthDistance, 1)
     );
-
   }
 }
-
-
