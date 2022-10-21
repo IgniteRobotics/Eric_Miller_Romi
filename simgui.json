@@ -19,11 +19,13 @@
       },
       "open": true
     },
+    "Preferences": {
+      "open": true
+    },
     "SmartDashboard": {
       "LeftMotor": {
         "open": true
-      },
-      "open": true
+      }
     }
   }
 }

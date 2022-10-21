@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import java.util.function.Supplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.RomiDrivetrain;
 
@@ -16,9 +18,10 @@ public class DriveDistance extends CommandBase {
   double leftDiff;
   double rightDiff;
   /** Creates a new DriveDistance. */
-  public DriveDistance(RomiDrivetrain InputedDrivetrain, double InputedDistance, double InputedSpeedReducer) {
+  public DriveDistance(RomiDrivetrain InputedDrivetrain, Supplier<Double> InputedDistance, double InputedSpeedReducer) {
+    double Unsuplied = InputedDistance.get();
     drivetrain = InputedDrivetrain;
-    Distance = InputedDistance + Math.signum(InputedDistance);
+    Distance = Unsuplied + Math.signum(Unsuplied);
     SpeedReducer = InputedSpeedReducer;
     addRequirements(drivetrain);
   }

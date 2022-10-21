@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import java.util.function.Supplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.RomiDrivetrain;
 
@@ -15,9 +17,10 @@ public class TurnDegrees extends CommandBase {
   double Limit;
   RomiDrivetrain m_drivetrain;
 
-  public TurnDegrees(RomiDrivetrain drivetrain,double degrees, double speedLimiter) {
+  public TurnDegrees(RomiDrivetrain drivetrain, Supplier<Double> degrees, double speedLimiter) {
+    double unsuplied = degrees.get();
     double inchPerDegree = Math.PI * 5.551 / 360;
-    arcLength = inchPerDegree * degrees + Math.signum(inchPerDegree * degrees);
+    arcLength = inchPerDegree * unsuplied + Math.signum(inchPerDegree * unsuplied);
     Limit = speedLimiter;
     m_drivetrain = drivetrain;
     

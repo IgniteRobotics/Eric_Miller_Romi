@@ -7,12 +7,15 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.OneBallAuton;
 import frc.robot.commands.TurnDegrees;
 import frc.robot.subsystems.RomiDrivetrain;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.DriveDistance;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -25,8 +28,8 @@ public class RobotContainer {
   private final RomiDrivetrain m_RomiDrivetrain = new RomiDrivetrain();
   private final XboxController m_controller = new XboxController(0);
   private final ArcadeDrive arcadeDriveCommand = new ArcadeDrive(m_RomiDrivetrain, () -> m_controller.getLeftY(),() -> m_controller.getRightX(), () -> m_controller.getRawAxis(5));
-  private final DriveDistance driveDistanceCommand = new DriveDistance(m_RomiDrivetrain, 5, 1);
-  private final TurnDegrees TurnCommand = new TurnDegrees(m_RomiDrivetrain, 100, 1);
+  
+
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_RomiDrivetrain);
 
@@ -48,9 +51,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
-    buttonA.whenHeld(driveDistanceCommand);
-    buttonB.whenHeld(TurnCommand);
+    
+  
   }
 
   private void setDefaultCommands(){
@@ -65,6 +67,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return new OneBallAuton(m_RomiDrivetrain);
   }
 }
