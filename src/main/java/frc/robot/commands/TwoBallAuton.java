@@ -20,10 +20,11 @@ public class TwoBallAuton extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new OneBallAuton(drivetrain),
-      new TurnDegrees(drivetrain, AutonPreferences.autonThirdAngle, 1),
-      new DriveDistance(drivetrain, AutonPreferences.autonThirdDistance, 1),
-      new TurnDegrees(drivetrain, AutonPreferences.autonFourthAngle, 1),
-      new DriveDistance(drivetrain, AutonPreferences.autonFourthDistance, 1)
+      new DriveDistance(drivetrain, AutonPreferences.autonDistance4, 1),
+      new TurnDegrees(drivetrain, AutonPreferences.autonAngle3, 1),
+      new DriveDistance(drivetrain, AutonPreferences.autonDistance5, 1),
+      new TurnDegrees(drivetrain, AutonPreferences.autonAngle4, 1),
+      new DriveDistance(drivetrain, AutonPreferences.autonDistance6, 1)
     );
   }
 }

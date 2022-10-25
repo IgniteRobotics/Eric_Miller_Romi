@@ -7,8 +7,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.FullAuton;
 import frc.robot.commands.OneBallAuton;
 import frc.robot.commands.TwoBallAuton;
+import frc.robot.commands.ThreeBallAuton;
 import frc.robot.commands.TurnDegrees;
 import frc.robot.subsystems.RomiDrivetrain;
 import frc.robot.commands.ArcadeDrive;
@@ -68,6 +70,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new TwoBallAuton(m_RomiDrivetrain);
+    return new FullAuton(m_RomiDrivetrain);
   }
 }
