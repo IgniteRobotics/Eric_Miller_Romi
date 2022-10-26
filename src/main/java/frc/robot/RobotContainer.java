@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.igniterobotics.robotbase.preferences.DoublePreference;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
@@ -17,6 +19,7 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.DriveDistance;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Parameters.AutonPreferences;
 
 
 
@@ -38,7 +41,12 @@ public class RobotContainer {
 
   private JoystickButton buttonA = new JoystickButton(m_controller, XboxController.Button.kA.value);
   private JoystickButton buttonB = new JoystickButton(m_controller, XboxController.Button.kB.value);
+
+  private DoublePreference Drive = new DoublePreference("DriveDistanceCommand", 5);
+  private DoublePreference Turn = new DoublePreference("TurnDistanceCommand", 90);
   
+  DriveDistance driveDistanceCommand = new DriveDistance(m_RomiDrivetrain, Drive, 1);
+  TurnDegrees turnDegreesCommand = new TurnDegrees(m_RomiDrivetrain, Turn, 1);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -55,6 +63,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     
+    buttonA.whenHeld(driveDistanceCommand);
+    buttonB.whenHeld(turnDegreesCommand);
   
   }
 
@@ -69,7 +79,16 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    Double Number = AutonPreferences.AutonType.getValue();
     // An ExampleCommand will run in autonomous
-    return new FullAuton(m_RomiDrivetrain);
+    if (Number == 1 ) return new OneBallAuton(m_RomiDrivetrain);
+
+    else if (Number == 2) return new TwoBallAuton(m_RomiDrivetrain);
+
+    else if (Number == 3) return new ThreeBallAuton(m_RomiDrivetrain);
+
+    else if (Number == 4) return new FullAuton(m_RomiDrivetrain);
+
+    else return new ExampleCommand(m_RomiDrivetrain);
   }
 }

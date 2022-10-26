@@ -7,6 +7,8 @@ import com.igniterobotics.robotbase.preferences.DoublePreference;
 
 public class AutonPreferences{
 
+    public static DoublePreference AutonType = new DoublePreference("Auton Type", 4);
+
     //One ball auton
 
     //Angles
