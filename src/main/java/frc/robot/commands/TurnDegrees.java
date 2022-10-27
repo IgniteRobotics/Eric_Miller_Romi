@@ -8,6 +8,7 @@ import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.RomiDrivetrain;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
@@ -38,9 +39,13 @@ public class TurnDegrees extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    SmartDashboard.putNumber("ArcLength", arcLength);
+    
     double Diff = arcLength - getEncoderAverage();
     double Rotation = Math.signum(Diff) * Limit * Math.cbrt(Math.log(Math.abs(Diff))/Math.log(Math.abs(arcLength)));
     m_drivetrain.arcadeDrive(0, Rotation);
+    SmartDashboard.putNumber("Diff", Diff);
+    SmartDashboard.putNumber("Rotation", Rotation);
   }
 
   // Called once the command ends or is interrupted.
