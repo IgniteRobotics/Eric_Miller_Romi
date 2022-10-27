@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.RomiDrivetrain;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import edu.wpi.first.math.MathUtil;
 
 
 public class TurnDegrees extends CommandBase {
@@ -42,7 +42,7 @@ public class TurnDegrees extends CommandBase {
     SmartDashboard.putNumber("ArcLength", arcLength);
     
     double Diff = arcLength - Math.signum(arcLength) * getEncoderAverage();
-    double Rotation = DetermineNegative(arcLength) * Limit * Math.sqrt(Math.log(Math.abs(Diff))/Math.log(Math.abs(arcLength)));
+    double Rotation = MathUtil.clamp(Limit * Math.sqrt(Math.log(Math.abs(Diff))/Math.log(Math.abs(arcLength))), 0, 1) ;
     m_drivetrain.arcadeDrive(0, Rotation);
     SmartDashboard.putNumber("Diff", Diff);
     SmartDashboard.putNumber("Rotation", Rotation);
@@ -56,7 +56,7 @@ public class TurnDegrees extends CommandBase {
   @Override
   public boolean isFinished() {
     double Diff = arcLength - getEncoderAverage();
-    if (Diff < 1.1 && Diff > 0.9){
+    if (Diff < 1.1){
       return true;
     }
     return false;
