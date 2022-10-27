@@ -41,7 +41,7 @@ public class TurnDegrees extends CommandBase {
   public void execute() {
     SmartDashboard.putNumber("ArcLength", arcLength);
     
-    double Diff = arcLength - getEncoderAverage();
+    double Diff = arcLength - Math.signum(arcLength) * getEncoderAverage();
     double Rotation = Math.signum(Diff) * Limit * Math.cbrt(Math.log(Math.abs(Diff))/Math.log(Math.abs(arcLength)));
     m_drivetrain.arcadeDrive(0, Rotation);
     SmartDashboard.putNumber("Diff", Diff);
@@ -63,7 +63,7 @@ public class TurnDegrees extends CommandBase {
   }
 
   private double getEncoderAverage(){
-    double average = (m_drivetrain.getLeftDistanceInch() + m_drivetrain.getRightDistanceInch())/2;
+    double average = (Math.abs(m_drivetrain.getLeftDistanceInch()) + Math.abs(m_drivetrain.getRightDistanceInch()))/2;
     return average;
   }
 }
