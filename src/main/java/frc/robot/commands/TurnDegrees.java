@@ -42,7 +42,7 @@ public class TurnDegrees extends CommandBase {
     SmartDashboard.putNumber("ArcLength", arcLength);
     
     double Diff = arcLength - Math.signum(arcLength) * getEncoderAverage();
-    double Rotation = MathUtil.clamp(Limit * Math.sqrt(Math.log(Math.abs(Diff))/Math.log(Math.abs(arcLength))), 0, 1) ;
+    double Rotation = MathUtil.clamp(Limit * Math.log(Math.abs(Diff))/Math.log(Math.abs(arcLength)), 0, 1) ;
     m_drivetrain.arcadeDrive(0, Rotation);
     SmartDashboard.putNumber("Diff", Diff);
     SmartDashboard.putNumber("Rotation", Rotation);
