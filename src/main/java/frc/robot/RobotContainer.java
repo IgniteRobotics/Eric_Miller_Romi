@@ -33,7 +33,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final RomiDrivetrain m_RomiDrivetrain = new RomiDrivetrain();
   private final XboxController m_controller = new XboxController(0);
-  private final ArcadeDrive arcadeDriveCommand = new ArcadeDrive(m_RomiDrivetrain, () -> m_controller.getLeftY(),() -> m_controller.getRightX(), () -> m_controller.getRawAxis(5));
+  private final ArcadeDrive arcadeDriveCommand = new ArcadeDrive(m_RomiDrivetrain, () -> m_controller.getRawAxis(1),() -> m_controller.getRawAxis(3), () -> m_controller.getRawAxis(5));
   
 
 
