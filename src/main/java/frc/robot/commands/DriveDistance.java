@@ -8,6 +8,7 @@ import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.RomiDrivetrain;
+import edu.wpi.first.math.MathUtil;
 
 
 
@@ -38,8 +39,8 @@ public class DriveDistance extends CommandBase {
   public void execute() {
   leftDiff = Distance - drivetrain.getLeftDistanceInch();
   rightDiff = Distance - drivetrain.getRightDistanceInch();
-  double leftSpeed = Math.signum(leftDiff) * SpeedReducer * Math.cbrt(Math.log(Math.abs(leftDiff))/Math.log(Math.abs(Distance)));
-  double rightSpeed = Math.signum(rightDiff) * SpeedReducer * Math.cbrt(Math.log(Math.abs(rightDiff))/Math.log(Math.abs(Distance)));
+  double leftSpeed = MathUtil.clamp(SpeedReducer * (Math.log(Math.abs(leftDiff))/Math.log(Math.abs(Distance))), 0, 1);
+  double rightSpeed = MathUtil.clamp(SpeedReducer * (Math.log(Math.abs(rightDiff))/Math.log(Math.abs(Distance))), 0, 1);
 
   drivetrain.Motors(leftSpeed, rightSpeed);
   }
