@@ -60,7 +60,7 @@ public class TurnDegrees extends CommandBase {
   @Override
   public boolean isFinished() {
     double Diff = arcLength - getEncoderAverage();
-    if (Diff < 1.1){
+    if (Math.abs(Diff) < 1.1){
       return true;
     }
     return false;
