@@ -11,6 +11,9 @@
   },
   "NetworkTables": {
     "LiveWindow": {
+      "RomiDrivetrain": {
+        "open": true
+      },
       "Ungrouped": {
         "DifferentialDrive[1]": {
           "open": true
