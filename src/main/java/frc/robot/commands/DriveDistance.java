@@ -16,7 +16,7 @@ public class DriveDistance extends CommandBase {
   RomiDrivetrain drivetrain;
   double Distance;
   double SpeedReducer;
-  double leftDiff;
+  double Diff;
   double rightDiff;
   /** Creates a new DriveDistance. */
   public DriveDistance(RomiDrivetrain InputedDrivetrain, Supplier<Double> InputedDistance, double InputedSpeedReducer) {
@@ -37,12 +37,10 @@ public class DriveDistance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  leftDiff = Distance - drivetrain.getLeftDistanceInch();
-  rightDiff = Distance - drivetrain.getRightDistanceInch();
-  double leftSpeed = MathUtil.clamp(SpeedReducer * (Math.log(Math.abs(leftDiff))/Math.log(Math.abs(Distance))), 0, 1);
-  double rightSpeed = MathUtil.clamp(SpeedReducer * (Math.log(Math.abs(rightDiff))/Math.log(Math.abs(Distance))), 0, 1);
-
-  drivetrain.Motors(leftSpeed, rightSpeed);
+  Diff = Distance - (drivetrain.getLeftDistanceInch() + drivetrain.getRightDistanceInch())/2;
+  double Speed = SpeedReducer * MathUtil.clamp((Math.log(Math.abs(Diff))/Math.log(Math.abs(Distance))), 0, 1);
+  
+  drivetrain.arcadeDrive(Speed, 0);;
   }
 
   // Called once the command ends or is interrupted.
@@ -54,9 +52,9 @@ public class DriveDistance extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    double AbsLeftDiff = Math.abs(Distance - drivetrain.getLeftDistanceInch());
-    double AbsRightDiff = Math.abs(Distance - drivetrain.getRightDistanceInch());
-    if(AbsLeftDiff < 1.1 && AbsRightDiff < 1.1){
+    double AbsDiff = Math.abs(Distance - (drivetrain.getLeftDistanceInch() + drivetrain.getRightDistanceInch())/2);
+  
+    if(AbsDiff < 1.1){
       return true;
     }
     return false;
