@@ -56,7 +56,7 @@ public class DriveDistance extends CommandBase {
   public boolean isFinished() {
     double AbsLeftDiff = Math.abs(Distance - drivetrain.getLeftDistanceInch());
     double AbsRightDiff = Math.abs(Distance - drivetrain.getRightDistanceInch());
-    if(AbsLeftDiff < 1.1 && AbsLeftDiff > 0.9 && AbsRightDiff < 1.1 && AbsRightDiff > 0.9){
+    if(AbsLeftDiff < 1.1 && AbsRightDiff < 1.1){
       return true;
     }
     return false;
