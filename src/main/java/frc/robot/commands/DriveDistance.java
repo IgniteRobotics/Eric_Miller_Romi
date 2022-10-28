@@ -38,7 +38,7 @@ public class DriveDistance extends CommandBase {
   @Override
   public void execute() {
   Diff = Distance - (drivetrain.getLeftDistanceInch() + drivetrain.getRightDistanceInch())/2;
-  double Speed = SpeedReducer * MathUtil.clamp((Math.log(Math.abs(Diff))/Math.log(Math.abs(Distance))), 0, 1);
+  double Speed = Math.signum(Distance) * SpeedReducer * MathUtil.clamp((Math.log(Math.abs(Diff))/Math.log(Math.abs(Distance))), 0, 1);
   
   drivetrain.arcadeDrive(Speed, 0);;
   }
