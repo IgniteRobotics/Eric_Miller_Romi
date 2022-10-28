@@ -46,7 +46,7 @@ public class TurnDegrees extends CommandBase {
     SmartDashboard.putNumber("ArcLength", arcLength);
     
     double Diff = arcLength - Math.signum(arcLength) * getEncoderAverage();
-    double Rotation = Math.signum(arcLength) * Limit * MathUtil.clamp(Math.log(Math.abs(Diff))/Math.log(Math.abs(arcLength)), 0, 1) ;
+    double Rotation = Math.signum(arcLength) * Limit * MathUtil.clamp(Math.log(Math.abs(Diff))/Math.log(Math.abs(arcLength)), 0, 1);
     m_drivetrain.arcadeDrive(0, Rotation);
     SmartDashboard.putNumber("Diff", Diff);
     SmartDashboard.putNumber("Rotation", Rotation);
@@ -59,7 +59,7 @@ public class TurnDegrees extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    double Diff = arcLength - getEncoderAverage();
+    double Diff = arcLength - Math.signum(arcLength) * getEncoderAverage();
     if (Math.abs(Diff) < 1.1){
       return true;
     }
