@@ -17,11 +17,12 @@ public class TurnDegrees extends CommandBase {
   double arcLength;
   double Limit;
   RomiDrivetrain m_drivetrain;
+  Supplier<Double> SuppliedDegrees;
 
   public TurnDegrees(RomiDrivetrain drivetrain, Supplier<Double> degrees, double speedLimiter) {
-    double unsuplied = degrees.get();
-    double inchPerDegree = Math.PI * 5.551 / 360;
-    arcLength = inchPerDegree * unsuplied + Math.signum(inchPerDegree * unsuplied);
+    SuppliedDegrees = degrees;
+    
+    
     Limit = speedLimiter;
     m_drivetrain = drivetrain;
     
@@ -34,6 +35,9 @@ public class TurnDegrees extends CommandBase {
   public void initialize() {
     m_drivetrain.stop();
     m_drivetrain.resetEncoders();
+    double unsuplied = SuppliedDegrees.get();
+    double inchPerDegree = Math.PI * 5.551 / 360;
+    arcLength = inchPerDegree * unsuplied + Math.signum(inchPerDegree * unsuplied);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

@@ -42,8 +42,8 @@ public class RobotContainer {
   private JoystickButton buttonA = new JoystickButton(m_controller, XboxController.Button.kA.value);
   private JoystickButton buttonB = new JoystickButton(m_controller, XboxController.Button.kB.value);
 
-  private DoublePreference Drive = new DoublePreference("DriveDistanceCommand", 5);
-  private DoublePreference Turn = new DoublePreference("TurnDistanceCommand", 90);
+  private DoublePreference Drive = new DoublePreference("DriveDistanceCommand", -5);
+  private DoublePreference Turn = new DoublePreference("TurnDistanceCommand", -90);
   
   DriveDistance driveDistanceCommand = new DriveDistance(m_RomiDrivetrain, Drive, 1);
   TurnDegrees turnDegreesCommand = new TurnDegrees(m_RomiDrivetrain, Turn, 1);

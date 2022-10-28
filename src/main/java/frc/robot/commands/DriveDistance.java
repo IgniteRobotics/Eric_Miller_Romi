@@ -18,11 +18,11 @@ public class DriveDistance extends CommandBase {
   double SpeedReducer;
   double Diff;
   double rightDiff;
+  Supplier<Double> SupplierDistance;
   /** Creates a new DriveDistance. */
   public DriveDistance(RomiDrivetrain InputedDrivetrain, Supplier<Double> InputedDistance, double InputedSpeedReducer) {
-    double Unsuplied = InputedDistance.get();
+    SupplierDistance = InputedDistance;
     drivetrain = InputedDrivetrain;
-    Distance = Unsuplied + Math.signum(Unsuplied);
     SpeedReducer = InputedSpeedReducer;
     addRequirements(drivetrain);
   }
@@ -32,6 +32,8 @@ public class DriveDistance extends CommandBase {
   public void initialize() {
     drivetrain.stop();
     drivetrain.resetEncoders();
+    double Unsuplied = SupplierDistance.get();
+    Distance = Unsuplied + Math.signum(Unsuplied);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
